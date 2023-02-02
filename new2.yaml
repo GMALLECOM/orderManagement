@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: G-Mall Order Items and Status API
+  version: 1.0.0
+
+paths:
+  /orders/{order_id}/items:
+    get:
+      description: Retrieve the items in an order
+      parameters:
+        - name: order_id
+          in: path
+          description: ID of the order to retrieve items for
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Order items retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item_id:
+                      type: integer
+                      description: ID of the item
+                    product_id:
+                      type: integer
+                      description: ID of the product
+                    name:
+                      type: string
+                      description: Name of the product
+                    quantity:
+                      type: integer
+                      description: Quantity of the product in the order
+
+  /orders/{order_id}/status:
+    get:
+      description: Retrieve the status of an order
+      parameters:
+        - name: order_id
+          in: path
+          description: ID of the order to retrieve status for
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Order status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: integer
+                  status:
+                    type: string
+                    description: Current status of the order, e.g. "Pending", "Shipped"
